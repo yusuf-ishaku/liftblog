@@ -1,0 +1,68 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import type { BlogForm } from "@/schemas";
+import { memo, useMemo } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
+
+interface BlogOgPreviewProps {
+  baseUrl: string;
+}
+
+export const BlogOgPreview = memo(function BlogOgPreview({
+  baseUrl,
+}: BlogOgPreviewProps) {
+  const form = useFormContext<BlogForm>();
+
+  const slug = useWatch({ control: form.control, name: "slug" });
+  const title = useWatch({ control: form.control, name: "title" });
+  const excerpt = useWatch({ control: form.control, name: "excerpt" });
+  const coverImage = useWatch({ control: form.control, name: "coverImage" });
+
+  const url = `${baseUrl}/blog/${slug || "your-slug"}`;
+  const displayTitle = title || "Your blog post title";
+  const description =
+    excerpt || "Your description will appear here as a preview.";
+
+  const image = useMemo(() => {
+    if (coverImage instanceof File) {
+      return URL.createObjectURL(coverImage);
+    }
+    return "https://placehold.co/1200x630?text=Image+Preview";
+  }, [coverImage]);
+
+  return (
+    <Card className="overflow-hidden border shadow-md">
+      <div className="flex flex-col sm:flex-row">
+        {/* Left Image Section */}
+        <div className="sm:w-1/3 bg-gray-100 ml-3">
+          <img
+            src={image}
+            alt={displayTitle}
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Right Content Section */}
+        <div className="sm:w-2/3 flex flex-col">
+          <CardHeader className="pb-2">
+            <CardDescription className="text-xs text-gray-500">
+              {url}
+            </CardDescription>
+            <CardTitle className="text-lg font-semibold line-clamp-2">
+              {displayTitle}
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent className="pt-0">
+            <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
+          </CardContent>
+        </div>
+      </div>
+    </Card>
+  );
+});
