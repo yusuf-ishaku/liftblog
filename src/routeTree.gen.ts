@@ -8,185 +8,185 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createServerRootRoute } from "@tanstack/react-start/server";
+import { createServerRootRoute } from '@tanstack/react-start/server'
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as AppRouteRouteImport } from "./routes/_app/route";
-import { Route as IndexRouteImport } from "./routes/index";
-import { Route as AuthLoginRouteImport } from "./routes/_auth/login";
-import { Route as AppEditorRouteImport } from "./routes/_app/editor";
-import { Route as BlogPostSlugRouteImport } from "./routes/_blog/post/$slug";
-import { ServerRoute as ApiAuthSplatServerRouteImport } from "./routes/api/auth/$";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AppEditorRouteImport } from './routes/_app/editor'
+import { Route as BlogPostSlugRouteImport } from './routes/_blog/post/$slug'
+import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/$'
 
-const rootServerRouteImport = createServerRootRoute();
+const rootServerRouteImport = createServerRootRoute()
 
 const AppRouteRoute = AppRouteRouteImport.update({
-  id: "/_app",
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: "/_auth/login",
-  path: "/login",
+  id: '/_auth/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const AppEditorRoute = AppEditorRouteImport.update({
-  id: "/editor",
-  path: "/editor",
+  id: '/editor',
+  path: '/editor',
   getParentRoute: () => AppRouteRoute,
-} as any);
+} as any)
 const BlogPostSlugRoute = BlogPostSlugRouteImport.update({
-  id: "/_blog/post/$slug",
-  path: "/post/$slug",
+  id: '/_blog/post/$slug',
+  path: '/post/$slug',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
-  id: "/api/auth/$",
-  path: "/api/auth/$",
+  id: '/api/auth/$',
+  path: '/api/auth/$',
   getParentRoute: () => rootServerRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/editor": typeof AppEditorRoute;
-  "/login": typeof AuthLoginRoute;
-  "/post/$slug": typeof BlogPostSlugRoute;
+  '/': typeof IndexRoute
+  '/editor': typeof AppEditorRoute
+  '/login': typeof AuthLoginRoute
+  '/post/$slug': typeof BlogPostSlugRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/editor": typeof AppEditorRoute;
-  "/login": typeof AuthLoginRoute;
-  "/post/$slug": typeof BlogPostSlugRoute;
+  '/': typeof IndexRoute
+  '/editor': typeof AppEditorRoute
+  '/login': typeof AuthLoginRoute
+  '/post/$slug': typeof BlogPostSlugRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/_app": typeof AppRouteRouteWithChildren;
-  "/_app/editor": typeof AppEditorRoute;
-  "/_auth/login": typeof AuthLoginRoute;
-  "/_blog/post/$slug": typeof BlogPostSlugRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/_app': typeof AppRouteRouteWithChildren
+  '/_app/editor': typeof AppEditorRoute
+  '/_auth/login': typeof AuthLoginRoute
+  '/_blog/post/$slug': typeof BlogPostSlugRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/editor" | "/login" | "/post/$slug";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/editor" | "/login" | "/post/$slug";
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/editor' | '/login' | '/post/$slug'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/editor' | '/login' | '/post/$slug'
   id:
-    | "__root__"
-    | "/"
-    | "/_app"
-    | "/_app/editor"
-    | "/_auth/login"
-    | "/_blog/post/$slug";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/editor'
+    | '/_auth/login'
+    | '/_blog/post/$slug'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AppRouteRoute: typeof AppRouteRouteWithChildren;
-  AuthLoginRoute: typeof AuthLoginRoute;
-  BlogPostSlugRoute: typeof BlogPostSlugRoute;
+  IndexRoute: typeof IndexRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
+  BlogPostSlugRoute: typeof BlogPostSlugRoute
 }
 export interface FileServerRoutesByFullPath {
-  "/api/auth/$": typeof ApiAuthSplatServerRoute;
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesByTo {
-  "/api/auth/$": typeof ApiAuthSplatServerRoute;
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRoutesById {
-  __root__: typeof rootServerRouteImport;
-  "/api/auth/$": typeof ApiAuthSplatServerRoute;
+  __root__: typeof rootServerRouteImport
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
 }
 export interface FileServerRouteTypes {
-  fileServerRoutesByFullPath: FileServerRoutesByFullPath;
-  fullPaths: "/api/auth/$";
-  fileServerRoutesByTo: FileServerRoutesByTo;
-  to: "/api/auth/$";
-  id: "__root__" | "/api/auth/$";
-  fileServerRoutesById: FileServerRoutesById;
+  fileServerRoutesByFullPath: FileServerRoutesByFullPath
+  fullPaths: '/api/auth/$'
+  fileServerRoutesByTo: FileServerRoutesByTo
+  to: '/api/auth/$'
+  id: '__root__' | '/api/auth/$'
+  fileServerRoutesById: FileServerRoutesById
 }
 export interface RootServerRouteChildren {
-  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute;
+  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/_app": {
-      id: "/_app";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AppRouteRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/_auth/login": {
-      id: "/_auth/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof AuthLoginRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/_app/editor": {
-      id: "/_app/editor";
-      path: "/editor";
-      fullPath: "/editor";
-      preLoaderRoute: typeof AppEditorRouteImport;
-      parentRoute: typeof AppRouteRoute;
-    };
-    "/_blog/post/$slug": {
-      id: "/_blog/post/$slug";
-      path: "/post/$slug";
-      fullPath: "/post/$slug";
-      preLoaderRoute: typeof BlogPostSlugRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/editor': {
+      id: '/_app/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof AppEditorRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_blog/post/$slug': {
+      id: '/_blog/post/$slug'
+      path: '/post/$slug'
+      fullPath: '/post/$slug'
+      preLoaderRoute: typeof BlogPostSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
-declare module "@tanstack/react-start/server" {
+declare module '@tanstack/react-start/server' {
   interface ServerFileRoutesByPath {
-    "/api/auth/$": {
-      id: "/api/auth/$";
-      path: "/api/auth/$";
-      fullPath: "/api/auth/$";
-      preLoaderRoute: typeof ApiAuthSplatServerRouteImport;
-      parentRoute: typeof rootServerRouteImport;
-    };
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
   }
 }
 
 interface AppRouteRouteChildren {
-  AppEditorRoute: typeof AppEditorRoute;
+  AppEditorRoute: typeof AppEditorRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppEditorRoute: AppEditorRoute,
-};
+}
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
   AppRouteRouteChildren,
-);
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   BlogPostSlugRoute: BlogPostSlugRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 const rootServerRouteChildren: RootServerRouteChildren = {
   ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
-};
+}
 export const serverRouteTree = rootServerRouteImport
   ._addFileChildren(rootServerRouteChildren)
-  ._addFileTypes<FileServerRouteTypes>();
+  ._addFileTypes<FileServerRouteTypes>()
