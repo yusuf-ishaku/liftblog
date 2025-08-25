@@ -11,20 +11,14 @@
 import { createServerRootRoute } from "@tanstack/react-start/server";
 
 import { Route as rootRouteImport } from "./routes/__root";
-import { Route as AuthRouteRouteImport } from "./routes/_auth/route";
 import { Route as AppRouteRouteImport } from "./routes/_app/route";
 import { Route as IndexRouteImport } from "./routes/index";
-import { Route as AuthLoginRouteImport } from "./routes/_auth/login";
 import { Route as AppEditorRouteImport } from "./routes/_app/editor";
 import { Route as BlogBlogSlugRouteImport } from "./routes/_blog/blog/$slug";
 import { ServerRoute as ApiAuthSplatServerRouteImport } from "./routes/api/auth/$";
 
 const rootServerRouteImport = createServerRootRoute();
 
-const AuthRouteRoute = AuthRouteRouteImport.update({
-  id: "/_auth",
-  getParentRoute: () => rootRouteImport,
-} as any);
 const AppRouteRoute = AppRouteRouteImport.update({
   id: "/_app",
   getParentRoute: () => rootRouteImport,
@@ -33,11 +27,6 @@ const IndexRoute = IndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => rootRouteImport,
-} as any);
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: "/login",
-  path: "/login",
-  getParentRoute: () => AuthRouteRoute,
 } as any);
 const AppEditorRoute = AppEditorRouteImport.update({
   id: "/editor",
@@ -58,43 +47,31 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/editor": typeof AppEditorRoute;
-  "/login": typeof AuthLoginRoute;
   "/blog/$slug": typeof BlogBlogSlugRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/editor": typeof AppEditorRoute;
-  "/login": typeof AuthLoginRoute;
   "/blog/$slug": typeof BlogBlogSlugRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
   "/_app": typeof AppRouteRouteWithChildren;
-  "/_auth": typeof AuthRouteRouteWithChildren;
   "/_app/editor": typeof AppEditorRoute;
-  "/_auth/login": typeof AuthLoginRoute;
   "/_blog/blog/$slug": typeof BlogBlogSlugRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/editor" | "/login" | "/blog/$slug";
+  fullPaths: "/" | "/editor" | "/blog/$slug";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/editor" | "/login" | "/blog/$slug";
-  id:
-    | "__root__"
-    | "/"
-    | "/_app"
-    | "/_auth"
-    | "/_app/editor"
-    | "/_auth/login"
-    | "/_blog/blog/$slug";
+  to: "/" | "/editor" | "/blog/$slug";
+  id: "__root__" | "/" | "/_app" | "/_app/editor" | "/_blog/blog/$slug";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AppRouteRoute: typeof AppRouteRouteWithChildren;
-  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
   BlogBlogSlugRoute: typeof BlogBlogSlugRoute;
 }
 export interface FileServerRoutesByFullPath {
@@ -121,13 +98,6 @@ export interface RootServerRouteChildren {
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/_auth": {
-      id: "/_auth";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof AuthRouteRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
     "/_app": {
       id: "/_app";
       path: "";
@@ -141,13 +111,6 @@ declare module "@tanstack/react-router" {
       fullPath: "/";
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
-    };
-    "/_auth/login": {
-      id: "/_auth/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof AuthLoginRouteImport;
-      parentRoute: typeof AuthRouteRoute;
     };
     "/_app/editor": {
       id: "/_app/editor";
@@ -189,22 +152,9 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
   AppRouteRouteChildren,
 );
 
-interface AuthRouteRouteChildren {
-  AuthLoginRoute: typeof AuthLoginRoute;
-}
-
-const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthLoginRoute: AuthLoginRoute,
-};
-
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-);
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
-  AuthRouteRoute: AuthRouteRouteWithChildren,
   BlogBlogSlugRoute: BlogBlogSlugRoute,
 };
 export const routeTree = rootRouteImport
