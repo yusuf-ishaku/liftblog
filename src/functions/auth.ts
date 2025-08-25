@@ -15,3 +15,16 @@ export const redirectGuests = createServerFn({ method: "GET" }).handler(
     }
   },
 );
+
+export const redirectUsers = createServerFn({ method: "GET" }).handler(
+  async () => {
+    const session = await auth.api.getSession({
+      headers: getTypesafeRequestHeaders(),
+    });
+    if (session) {
+      throw redirect({
+        to: "/editor",
+      });
+    }
+  },
+);

@@ -5,17 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { APP_URL } from "@/config";
 import type { BlogForm } from "@/schemas";
 import { memo, useMemo } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
 
-interface BlogOgPreviewProps {
-  baseUrl: string;
-}
-
-export const BlogOgPreview = memo(function BlogOgPreview({
-  baseUrl,
-}: BlogOgPreviewProps) {
+export const BlogOgPreview = memo(function BlogOgPreview() {
   const form = useFormContext<BlogForm>();
 
   const slug = useWatch({ control: form.control, name: "slug" });
@@ -23,7 +18,7 @@ export const BlogOgPreview = memo(function BlogOgPreview({
   const excerpt = useWatch({ control: form.control, name: "excerpt" });
   const coverImage = useWatch({ control: form.control, name: "coverImage" });
 
-  const url = `${baseUrl}/blog/${slug || "your-slug"}`;
+  const url = `${APP_URL}/blog/${slug || "your-slug"}`;
   const displayTitle = title || "Your blog post title";
   const description =
     excerpt || "Your description will appear here as a preview.";

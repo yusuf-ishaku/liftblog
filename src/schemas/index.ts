@@ -9,7 +9,7 @@ export const newBlogSchema = z
     excerpt: z.string().max(160).optional(),
     category: z.string().min(1, "Category is required"),
     content: z.string().min(1, "Content is required"),
-    tags: z.array(z.string()).optional(),
+    tags: z.string().array().optional(),
     coverImage: z
       .instanceof(File)
       .optional()

@@ -27,7 +27,7 @@ export const publishBlog = createServerFn({ method: "POST" })
       },
     });
     throw redirect({
-      to: "/post/$slug",
+      to: "/blog/$slug",
       params: {
         slug,
       },

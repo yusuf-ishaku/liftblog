@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { zfd } from "zod-form-data";
 
 export const Route = createFileRoute("/_app/editor")({
   component: BlogEditor,
@@ -39,7 +40,8 @@ function BlogEditor() {
         if (!value) continue;
         formData.append(key, value);
       }
-      tags?.forEach((tag) => formData.append("tags[]", tag));
+      tags?.forEach((tag) => formData.append("tags", tag));
+      zfd.formData(newBlogSchema).parse(formData);
       await publishBlog({
         data: formData,
       });
@@ -85,7 +87,7 @@ function BlogEditor() {
           <div className="space-y-6">
             <EditorSidebar />
             {/* ✅ OG Preview */}
-            <BlogOgPreview baseUrl="https://example.com" />
+            <BlogOgPreview />
           </div>
         </form>
       </Form>
