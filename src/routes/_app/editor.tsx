@@ -3,6 +3,7 @@ import { ContentEditorCard } from "@/components/editor/content-editor-card";
 import { EditorSidebar } from "@/components/editor/editor-sidebar";
 import { PostDetailsCard } from "@/components/editor/post-details-card";
 import { Form } from "@/components/ui/form";
+import { publishBlog } from "@/functions/blog";
 import { newBlogSchema, type BlogForm } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -13,6 +14,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/_app/editor")({
   component: BlogEditor,
 });
+
+const toastId = "PUBLISH-TOAST";
 
 function BlogEditor() {
   const form = useForm<BlogForm>({
@@ -37,9 +40,28 @@ function BlogEditor() {
         formData.append(key, value);
       }
       tags?.forEach((tag) => formData.append("tags[]", tag));
+      await publishBlog({
+        data: formData,
+      });
     },
-    onSuccess: () => toast.success(`Post published!`),
-    onError: () => toast.error("Failed to publish post"),
+    onMutate: () => {
+      toast.loading("Publishing post", {
+        id: toastId,
+        description: "",
+      });
+    },
+    onSuccess: () => {
+      toast.success(`Post published!`, {
+        id: toastId,
+        description: "",
+      });
+    },
+    onError: (error) => {
+      toast.error("Failed to publish post", {
+        id: toastId,
+        description: error.message,
+      });
+    },
   });
 
   return (

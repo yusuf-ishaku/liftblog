@@ -15,7 +15,7 @@ import { Route as AppRouteRouteImport } from "./routes/_app/route";
 import { Route as IndexRouteImport } from "./routes/index";
 import { Route as AuthLoginRouteImport } from "./routes/_auth/login";
 import { Route as AppEditorRouteImport } from "./routes/_app/editor";
-import { Route as BlogPostPostIdRouteImport } from "./routes/_blog/post/$postId";
+import { Route as BlogPostSlugRouteImport } from "./routes/_blog/post/$slug";
 import { ServerRoute as ApiAuthSplatServerRouteImport } from "./routes/api/auth/$";
 
 const rootServerRouteImport = createServerRootRoute();
@@ -39,9 +39,9 @@ const AppEditorRoute = AppEditorRouteImport.update({
   path: "/editor",
   getParentRoute: () => AppRouteRoute,
 } as any);
-const BlogPostPostIdRoute = BlogPostPostIdRouteImport.update({
-  id: "/_blog/post/$postId",
-  path: "/post/$postId",
+const BlogPostSlugRoute = BlogPostSlugRouteImport.update({
+  id: "/_blog/post/$slug",
+  path: "/post/$slug",
   getParentRoute: () => rootRouteImport,
 } as any);
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
@@ -54,13 +54,13 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/editor": typeof AppEditorRoute;
   "/login": typeof AuthLoginRoute;
-  "/post/$postId": typeof BlogPostPostIdRoute;
+  "/post/$slug": typeof BlogPostSlugRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/editor": typeof AppEditorRoute;
   "/login": typeof AuthLoginRoute;
-  "/post/$postId": typeof BlogPostPostIdRoute;
+  "/post/$slug": typeof BlogPostSlugRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
@@ -68,27 +68,27 @@ export interface FileRoutesById {
   "/_app": typeof AppRouteRouteWithChildren;
   "/_app/editor": typeof AppEditorRoute;
   "/_auth/login": typeof AuthLoginRoute;
-  "/_blog/post/$postId": typeof BlogPostPostIdRoute;
+  "/_blog/post/$slug": typeof BlogPostSlugRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/editor" | "/login" | "/post/$postId";
+  fullPaths: "/" | "/editor" | "/login" | "/post/$slug";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/editor" | "/login" | "/post/$postId";
+  to: "/" | "/editor" | "/login" | "/post/$slug";
   id:
     | "__root__"
     | "/"
     | "/_app"
     | "/_app/editor"
     | "/_auth/login"
-    | "/_blog/post/$postId";
+    | "/_blog/post/$slug";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AppRouteRoute: typeof AppRouteRouteWithChildren;
   AuthLoginRoute: typeof AuthLoginRoute;
-  BlogPostPostIdRoute: typeof BlogPostPostIdRoute;
+  BlogPostSlugRoute: typeof BlogPostSlugRoute;
 }
 export interface FileServerRoutesByFullPath {
   "/api/auth/$": typeof ApiAuthSplatServerRoute;
@@ -142,11 +142,11 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AppEditorRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
-    "/_blog/post/$postId": {
-      id: "/_blog/post/$postId";
-      path: "/post/$postId";
-      fullPath: "/post/$postId";
-      preLoaderRoute: typeof BlogPostPostIdRouteImport;
+    "/_blog/post/$slug": {
+      id: "/_blog/post/$slug";
+      path: "/post/$slug";
+      fullPath: "/post/$slug";
+      preLoaderRoute: typeof BlogPostSlugRouteImport;
       parentRoute: typeof rootRouteImport;
     };
   }
@@ -179,7 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
-  BlogPostPostIdRoute: BlogPostPostIdRoute,
+  BlogPostSlugRoute: BlogPostSlugRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

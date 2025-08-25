@@ -11,3 +11,6 @@ count.txt
 .vinxi
 todos.json
 tsconfig.tsbuildinfo
+
+/generated/prisma
+.vercel

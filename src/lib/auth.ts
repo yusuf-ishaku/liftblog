@@ -1,20 +1,18 @@
 import { reactStartCookies } from "better-auth/react-start";
 import { APP_URL } from "@/config";
 import { betterAuth } from "better-auth";
-import { Pool } from "pg";
+import "dotenv/config";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prisma } from "./prisma";
 
 export const auth = betterAuth({
-  database: new Pool({
-    connectionString: import.meta.env.DATABASE_URL,
-    password: import.meta.env.POSTGRES_PASSWORD,
-    database: import.meta.env.POSTGRES_DATABASE,
-    host: import.meta.env.POSTGRES_HOST,
-    user: import.meta.env.POSTGRES_USER,
+  database: prismaAdapter(prisma, {
+    provider: "sqlite",
   }),
   socialProviders: {
     github: {
-      clientId: import.meta.env.GITHUB_CLIENT_ID!,
-      clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     },
   },
   baseURL: APP_URL,

@@ -1,10 +1,12 @@
 import AppSidebar from "@/components/global/app-sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { redirectGuests } from "@/functions/auth";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app")({
   component: RouteComponent,
+  beforeLoad: () => redirectGuests(),
 });
 
 function RouteComponent() {

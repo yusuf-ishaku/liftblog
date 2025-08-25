@@ -37,5 +37,6 @@ export default defineConfig([
     ".vinxi",
     "node_modules",
     "src/routeTree.gen.ts",
+    ".vercel",
   ]),
 ]);

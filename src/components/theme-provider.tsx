@@ -12,8 +12,7 @@ const ThemeContext = createContext<ThemeContextVal | null>(null);
 export function ThemeProvider({ children, theme }: Props) {
   const router = useRouter();
   function setTheme(val: Theme) {
-    void setThemeServerFn({ data: val });
-    void router.invalidate();
+    void setThemeServerFn({ data: val }).then(() => router.invalidate());
   }
   return <ThemeContext value={{ theme, setTheme }}>{children}</ThemeContext>;
 }
