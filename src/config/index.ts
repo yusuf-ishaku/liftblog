@@ -1,3 +1,3 @@
-export const APP_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+export const APP_URL = import.meta.env.APP_URL
+  ? `https://${import.meta.env.APP_URL}`
   : "http://localhost:3000";

@@ -5,16 +5,16 @@ import { Pool } from "pg";
 
 export const auth = betterAuth({
   database: new Pool({
-    connectionString: process.env.DATABASE_URL,
-    password: process.env.POSTGRES_PASSWORD,
-    database: process.env.POSTGRES_DATABASE,
-    host: process.env.POSTGRES_HOST,
-    user: process.env.POSTGRES_USER,
+    connectionString: import.meta.env.DATABASE_URL,
+    password: import.meta.env.POSTGRES_PASSWORD,
+    database: import.meta.env.POSTGRES_DATABASE,
+    host: import.meta.env.POSTGRES_HOST,
+    user: import.meta.env.POSTGRES_USER,
   }),
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientId: import.meta.env.GITHUB_CLIENT_ID!,
+      clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
     },
   },
   baseURL: APP_URL,
