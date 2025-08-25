@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { APP_URL } from "@/config";
 import { getBlogPostBySlug } from "@/functions/blog";
 import { createFileRoute, type AnyRouteMatch } from "@tanstack/react-router";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -62,6 +63,10 @@ export const Route = createFileRoute("/_blog/blog/$slug")({
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
+        {
+          property: "og:url",
+          content: `${APP_URL}/blog/${post.slug}`,
+        },
       ],
     };
   },

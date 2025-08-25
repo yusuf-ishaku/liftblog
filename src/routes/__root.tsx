@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "../styles.css?url";
+import { APP_URL } from "@/config";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -28,7 +29,38 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "Applift Blog",
+      },
+      {
+        property: "og:site_name",
+        content: "Applift Blog",
+      },
+      {
+        property: "og:url",
+        content: APP_URL,
+      },
+      {
+        property: "description",
+        content:
+          "Explore the Applift Blog for expert insights on digital transformation, bespoke software solutions, web & mobile development, UI/UX design, blockchain innovation, and more. Stay informed, inspired, and ahead in the digital landscape with Applift.",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore the Applift Blog for expert insights on digital transformation, bespoke software solutions, web & mobile development, UI/UX design, blockchain innovation, and more. Stay informed, inspired, and ahead in the digital landscape with Applift.",
+      },
+      {
+        property: "twitter:description",
+        content:
+          "Explore the Applift Blog for expert insights on digital transformation, bespoke software solutions, web & mobile development, UI/UX design, blockchain innovation, and more. Stay informed, inspired, and ahead in the digital landscape with Applift.",
+      },
+      {
+        property: "og:title",
+        content: "Applift Blog",
+      },
+      {
+        property: "twitter:title",
+        content: "Applift Blog",
       },
     ],
     links: [
