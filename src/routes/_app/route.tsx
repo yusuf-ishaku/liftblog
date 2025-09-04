@@ -1,25 +1,19 @@
-import AppSidebar from "@/components/global/app-sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { redirectGuests } from "@/functions/auth";
+import Footer from "@/components/global/footer";
+import Navbar from "@/components/global/navbar";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app")({
   component: RouteComponent,
-  beforeLoad: () => redirectGuests(),
 });
 
 function RouteComponent() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main className="w-full">
-        <div className="flex items-center pt-2 px-4">
-          <ThemeToggle />
-          <SidebarTrigger />
-        </div>
+    <>
+      <Navbar />
+      <main className="w-full px-[80px] mt-[32px]">
         <Outlet />
       </main>
-    </SidebarProvider>
+      <Footer />
+    </>
   );
 }

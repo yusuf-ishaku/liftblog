@@ -11,14 +11,22 @@
 import { createServerRootRoute } from "@tanstack/react-start/server";
 
 import { Route as rootRouteImport } from "./routes/__root";
+import { Route as DemoRouteRouteImport } from "./routes/_demo/route";
 import { Route as AppRouteRouteImport } from "./routes/_app/route";
 import { Route as IndexRouteImport } from "./routes/index";
-import { Route as AppEditorRouteImport } from "./routes/_app/editor";
-import { Route as BlogBlogSlugRouteImport } from "./routes/_blog/blog/$slug";
+import { Route as DemoEditorRouteImport } from "./routes/_demo/editor";
+import { Route as AppCompanyRouteImport } from "./routes/_app/company";
+import { Route as AppBlogIndexRouteImport } from "./routes/_app/blog/index";
+import { Route as BlogBlogxSlugRouteImport } from "./routes/_blog/blogx/$slug";
+import { Route as AppBlogSlugRouteImport } from "./routes/_app/blog/$slug";
 import { ServerRoute as ApiAuthSplatServerRouteImport } from "./routes/api/auth/$";
 
 const rootServerRouteImport = createServerRootRoute();
 
+const DemoRouteRoute = DemoRouteRouteImport.update({
+  id: "/_demo",
+  getParentRoute: () => rootRouteImport,
+} as any);
 const AppRouteRoute = AppRouteRouteImport.update({
   id: "/_app",
   getParentRoute: () => rootRouteImport,
@@ -28,15 +36,30 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any);
-const AppEditorRoute = AppEditorRouteImport.update({
+const DemoEditorRoute = DemoEditorRouteImport.update({
   id: "/editor",
   path: "/editor",
+  getParentRoute: () => DemoRouteRoute,
+} as any);
+const AppCompanyRoute = AppCompanyRouteImport.update({
+  id: "/company",
+  path: "/company",
   getParentRoute: () => AppRouteRoute,
 } as any);
-const BlogBlogSlugRoute = BlogBlogSlugRouteImport.update({
-  id: "/_blog/blog/$slug",
-  path: "/blog/$slug",
+const AppBlogIndexRoute = AppBlogIndexRouteImport.update({
+  id: "/blog/",
+  path: "/blog/",
+  getParentRoute: () => AppRouteRoute,
+} as any);
+const BlogBlogxSlugRoute = BlogBlogxSlugRouteImport.update({
+  id: "/_blog/blogx/$slug",
+  path: "/blogx/$slug",
   getParentRoute: () => rootRouteImport,
+} as any);
+const AppBlogSlugRoute = AppBlogSlugRouteImport.update({
+  id: "/blog/$slug",
+  path: "/blog/$slug",
+  getParentRoute: () => AppRouteRoute,
 } as any);
 const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
   id: "/api/auth/$",
@@ -46,33 +69,59 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
-  "/editor": typeof AppEditorRoute;
-  "/blog/$slug": typeof BlogBlogSlugRoute;
+  "/company": typeof AppCompanyRoute;
+  "/editor": typeof DemoEditorRoute;
+  "/blog/$slug": typeof AppBlogSlugRoute;
+  "/blogx/$slug": typeof BlogBlogxSlugRoute;
+  "/blog": typeof AppBlogIndexRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
-  "/editor": typeof AppEditorRoute;
-  "/blog/$slug": typeof BlogBlogSlugRoute;
+  "/company": typeof AppCompanyRoute;
+  "/editor": typeof DemoEditorRoute;
+  "/blog/$slug": typeof AppBlogSlugRoute;
+  "/blogx/$slug": typeof BlogBlogxSlugRoute;
+  "/blog": typeof AppBlogIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
   "/_app": typeof AppRouteRouteWithChildren;
-  "/_app/editor": typeof AppEditorRoute;
-  "/_blog/blog/$slug": typeof BlogBlogSlugRoute;
+  "/_demo": typeof DemoRouteRouteWithChildren;
+  "/_app/company": typeof AppCompanyRoute;
+  "/_demo/editor": typeof DemoEditorRoute;
+  "/_app/blog/$slug": typeof AppBlogSlugRoute;
+  "/_blog/blogx/$slug": typeof BlogBlogxSlugRoute;
+  "/_app/blog/": typeof AppBlogIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/editor" | "/blog/$slug";
+  fullPaths:
+    | "/"
+    | "/company"
+    | "/editor"
+    | "/blog/$slug"
+    | "/blogx/$slug"
+    | "/blog";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/editor" | "/blog/$slug";
-  id: "__root__" | "/" | "/_app" | "/_app/editor" | "/_blog/blog/$slug";
+  to: "/" | "/company" | "/editor" | "/blog/$slug" | "/blogx/$slug" | "/blog";
+  id:
+    | "__root__"
+    | "/"
+    | "/_app"
+    | "/_demo"
+    | "/_app/company"
+    | "/_demo/editor"
+    | "/_app/blog/$slug"
+    | "/_blog/blogx/$slug"
+    | "/_app/blog/";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AppRouteRoute: typeof AppRouteRouteWithChildren;
-  BlogBlogSlugRoute: typeof BlogBlogSlugRoute;
+  DemoRouteRoute: typeof DemoRouteRouteWithChildren;
+  BlogBlogxSlugRoute: typeof BlogBlogxSlugRoute;
 }
 export interface FileServerRoutesByFullPath {
   "/api/auth/$": typeof ApiAuthSplatServerRoute;
@@ -98,6 +147,13 @@ export interface RootServerRouteChildren {
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
+    "/_demo": {
+      id: "/_demo";
+      path: "";
+      fullPath: "";
+      preLoaderRoute: typeof DemoRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     "/_app": {
       id: "/_app";
       path: "";
@@ -112,19 +168,40 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    "/_app/editor": {
-      id: "/_app/editor";
+    "/_demo/editor": {
+      id: "/_demo/editor";
       path: "/editor";
       fullPath: "/editor";
-      preLoaderRoute: typeof AppEditorRouteImport;
+      preLoaderRoute: typeof DemoEditorRouteImport;
+      parentRoute: typeof DemoRouteRoute;
+    };
+    "/_app/company": {
+      id: "/_app/company";
+      path: "/company";
+      fullPath: "/company";
+      preLoaderRoute: typeof AppCompanyRouteImport;
       parentRoute: typeof AppRouteRoute;
     };
-    "/_blog/blog/$slug": {
-      id: "/_blog/blog/$slug";
+    "/_app/blog/": {
+      id: "/_app/blog/";
+      path: "/blog";
+      fullPath: "/blog";
+      preLoaderRoute: typeof AppBlogIndexRouteImport;
+      parentRoute: typeof AppRouteRoute;
+    };
+    "/_blog/blogx/$slug": {
+      id: "/_blog/blogx/$slug";
+      path: "/blogx/$slug";
+      fullPath: "/blogx/$slug";
+      preLoaderRoute: typeof BlogBlogxSlugRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/_app/blog/$slug": {
+      id: "/_app/blog/$slug";
       path: "/blog/$slug";
       fullPath: "/blog/$slug";
-      preLoaderRoute: typeof BlogBlogSlugRouteImport;
-      parentRoute: typeof rootRouteImport;
+      preLoaderRoute: typeof AppBlogSlugRouteImport;
+      parentRoute: typeof AppRouteRoute;
     };
   }
 }
@@ -141,21 +218,38 @@ declare module "@tanstack/react-start/server" {
 }
 
 interface AppRouteRouteChildren {
-  AppEditorRoute: typeof AppEditorRoute;
+  AppCompanyRoute: typeof AppCompanyRoute;
+  AppBlogSlugRoute: typeof AppBlogSlugRoute;
+  AppBlogIndexRoute: typeof AppBlogIndexRoute;
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppEditorRoute: AppEditorRoute,
+  AppCompanyRoute: AppCompanyRoute,
+  AppBlogSlugRoute: AppBlogSlugRoute,
+  AppBlogIndexRoute: AppBlogIndexRoute,
 };
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
   AppRouteRouteChildren,
 );
 
+interface DemoRouteRouteChildren {
+  DemoEditorRoute: typeof DemoEditorRoute;
+}
+
+const DemoRouteRouteChildren: DemoRouteRouteChildren = {
+  DemoEditorRoute: DemoEditorRoute,
+};
+
+const DemoRouteRouteWithChildren = DemoRouteRoute._addFileChildren(
+  DemoRouteRouteChildren,
+);
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
-  BlogBlogSlugRoute: BlogBlogSlugRoute,
+  DemoRouteRoute: DemoRouteRouteWithChildren,
+  BlogBlogxSlugRoute: BlogBlogxSlugRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

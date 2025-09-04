@@ -36,6 +36,7 @@
   --sidebar-accent-foreground: oklch(0.2077 0.0398 265.7549);
   --sidebar-border: oklch(0.9288 0.0126 255.5078);
   --sidebar-ring: oklch(0.567 0.1546 248.5156);
+
   --font-sans:
     Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
@@ -61,8 +62,9 @@
 }
 
 .dark {
-  --background: oklch(0.1763 0.014 258.3572);
-  --foreground: oklch(0.8569 0.0141 247.9925);
+  --background: #00060a;
+  /* --foreground: oklch(0.8569 0.0141 247.9925); */
+  --foreground: white;
   --card: oklch(0.2202 0.0157 256.8163);
   --card-foreground: oklch(0.9425 0.0111 243.6566);
   --popover: oklch(0.1763 0.014 258.3572);
@@ -179,12 +181,140 @@ body {
   letter-spacing: var(--tracking-normal);
 }
 
+@theme inline {
+  /* Company Color Palettes */
+
+  /* Primary Blue Palette */
+  --color-primary-50: #e6f0f8;
+  --color-primary-100: #cce0f0;
+  --color-primary-200: #b3d1e9;
+  --color-primary-300: #9ac1e1;
+  --color-primary-400: #81b2da;
+  --color-primary-500: #67a2d3;
+  --color-primary-600: #4e93cb;
+  --color-primary-700: #3583c4;
+  --color-primary-800: #1b74bc;
+  --color-primary-900: #0264b5;
+
+  /* Neutral Gray Palette */
+  --color-neutral-50: #e7e7e7;
+  --color-neutral-100: #cfcfcf;
+  --color-neutral-200: #b7b7b7;
+  --color-neutral-300: #9f9f9f;
+  --color-neutral-400: #878787;
+  --color-neutral-500: #6f6f6f;
+  --color-neutral-600: #575757;
+  --color-neutral-700: #3f3f3f;
+  --color-neutral-800: #272727;
+  --color-neutral-900: #0f0f0f;
+
+  /* Warm Gray Palette */
+  --color-warm-50: #ebebeb;
+  --color-warm-100: #d7d7d7;
+  --color-warm-200: #c3c2c2;
+  --color-warm-300: #afaeae;
+  --color-warm-400: #9b9a9a;
+  --color-warm-500: #878686;
+  --color-warm-600: #737272;
+  --color-warm-700: #5f5e5e;
+  --color-warm-800: #4b4949;
+  --color-warm-900: #373535;
+
+  /* Yellow/Gold Palette */
+  --color-yellow-50: #faf7e6;
+  --color-yellow-100: #f5efcd;
+  --color-yellow-200: #efe6b4;
+  --color-yellow-300: #eade9b;
+  --color-yellow-400: #e5d682;
+  --color-yellow-500: #e0ce69;
+  --color-yellow-600: #dbc650;
+  --color-yellow-700: #d5be37;
+  --color-yellow-800: #d0b51e;
+  --color-yellow-900: #cbad06;
+
+  /* Red Palette */
+  --color-red-50: #fae6e6;
+  --color-red-100: #f5cdcd;
+  --color-red-200: #efb4b4;
+  --color-red-300: #ea9b9b;
+  --color-red-400: #e58282;
+  --color-red-500: #e06969;
+  --color-red-600: #db5050;
+  --color-red-700: #d53737;
+  --color-red-800: #d01e1e;
+  --color-red-900: #cb0606;
+
+  /* Added dark mode variants for all company color palettes */
+  /* Dark Mode Primary Blue Palette - inverted for better contrast */
+  --color-primary-50-dark: #0264b5;
+  --color-primary-100-dark: #1b74bc;
+  --color-primary-200-dark: #3583c4;
+  --color-primary-300-dark: #4e93cb;
+  --color-primary-400-dark: #67a2d3;
+  --color-primary-500-dark: #81b2da;
+  --color-primary-600-dark: #9ac1e1;
+  --color-primary-700-dark: #b3d1e9;
+  --color-primary-800-dark: #cce0f0;
+  --color-primary-900-dark: #e6f0f8;
+
+  /* Dark Mode Neutral Gray Palette - inverted */
+  --color-neutral-50-dark: #0f0f0f;
+  --color-neutral-100-dark: #272727;
+  --color-neutral-200-dark: #3f3f3f;
+  --color-neutral-300-dark: #575757;
+  --color-neutral-400-dark: #6f6f6f;
+  --color-neutral-500-dark: #878787;
+  --color-neutral-600-dark: #9f9f9f;
+  --color-neutral-700-dark: #b7b7b7;
+  --color-neutral-800-dark: #cfcfcf;
+  --color-neutral-900-dark: #e7e7e7;
+
+  /* Dark Mode Warm Gray Palette - inverted */
+  --color-warm-50-dark: #373535;
+  --color-warm-100-dark: #4b4949;
+  --color-warm-200-dark: #5f5e5e;
+  --color-warm-300-dark: #737272;
+  --color-warm-400-dark: #878686;
+  --color-warm-500-dark: #9b9a9a;
+  --color-warm-600-dark: #afaeae;
+  --color-warm-700-dark: #c3c2c2;
+  --color-warm-800-dark: #d7d7d7;
+  --color-warm-900-dark: #ebebeb;
+
+  /* Dark Mode Yellow/Gold Palette - adjusted for dark backgrounds */
+  --color-yellow-50-dark: #cbad06;
+  --color-yellow-100-dark: #d0b51e;
+  --color-yellow-200-dark: #d5be37;
+  --color-yellow-300-dark: #dbc650;
+  --color-yellow-400-dark: #e0ce69;
+  --color-yellow-500-dark: #e5d682;
+  --color-yellow-600-dark: #eade9b;
+  --color-yellow-700-dark: #efe6b4;
+  --color-yellow-800-dark: #f5efcd;
+  --color-yellow-900-dark: #faf7e6;
+
+  /* Dark Mode Red Palette - adjusted for dark backgrounds */
+  --color-red-50-dark: #cb0606;
+  --color-red-100-dark: #d01e1e;
+  --color-red-200-dark: #d53737;
+  --color-red-300-dark: #db5050;
+  --color-red-400-dark: #e06969;
+  --color-red-500-dark: #e58282;
+  --color-red-600-dark: #ea9b9b;
+  --color-red-700-dark: #efb4b4;
+  --color-red-800-dark: #f5cdcd;
+  --color-red-900-dark: #fae6e6;
+
+  /* Fonts */
+  --font-jakrata: "Plus Jakarta Sans", sans-serif;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-jakrata;
   }
 }
 
@@ -195,11 +325,12 @@ body {
   }
 
   h1 {
-    @apply scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance;
   }
 
   h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    /* @apply border-b */
+    @apply scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0;
   }
 
   h3 {
@@ -286,4 +417,8 @@ body {
   hr {
     @apply bg-border shrink-0 h-px w-full;
   }
+}
+
+* {
+  /* @apply border border-red-500 border-solid; */
 }

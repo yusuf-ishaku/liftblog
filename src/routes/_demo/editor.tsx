@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { zfd } from "zod-form-data";
 
-export const Route = createFileRoute("/_app/editor")({
+export const Route = createFileRoute("/_demo/editor")({
   component: BlogEditor,
 });
 

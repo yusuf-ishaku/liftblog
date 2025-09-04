@@ -1,5 +1,7 @@
+import appliftLogo from "@/assets/images/applift-logo.png";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { APP_URL } from "@/config";
 import { getThemeServerFn } from "@/lib/theme";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -11,7 +13,6 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "../styles.css?url";
-import { APP_URL } from "@/config";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -29,11 +30,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "Applift Blog",
+        title: "Applift",
       },
       {
         property: "og:site_name",
-        content: "Applift Blog",
+        content: "Applift",
       },
       {
         property: "og:url",
@@ -56,17 +57,34 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
       {
         property: "og:title",
-        content: "Applift Blog",
+        content: "Applift",
       },
       {
         property: "twitter:title",
-        content: "Applift Blog",
+        content: "Applift",
       },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap",
+      },
+      {
+        rel: "icon",
+        href: appliftLogo,
       },
     ],
   }),

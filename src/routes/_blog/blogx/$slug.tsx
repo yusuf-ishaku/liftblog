@@ -1,11 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { APP_URL } from "@/config";
 import { getBlogPostBySlug } from "@/functions/blog";
+import { extractNameInitials } from "@/utils/client";
 import { createFileRoute, type AnyRouteMatch } from "@tanstack/react-router";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
-export const Route = createFileRoute("/_blog/blog/$slug")({
+export const Route = createFileRoute("/_blog/blogx/$slug")({
   component: RouteComponent,
   loader: ({ params }) =>
     getBlogPostBySlug({
@@ -93,10 +94,7 @@ function RouteComponent() {
             <Avatar className="inline-block w-6 h-6 mx-auto rounded-full ml-2 align-middle">
               <AvatarImage src={post.author.image} alt={post.author.name} />
               <AvatarFallback>
-                {post.author.name
-                  .split(" ")
-                  .map((val) => val[0])
-                  .join("")}
+                {extractNameInitials(post.author.name)}
               </AvatarFallback>
             </Avatar>
           )}
