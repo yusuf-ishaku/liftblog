@@ -68,7 +68,7 @@ const links = linkOptions([
     label: "Privacy Policy",
   },
   {
-    to: "/contact" as never,
+    to: "/contact",
     label: "Contact",
   },
 ]);
