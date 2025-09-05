@@ -1,3 +1,5 @@
+import { Button } from "../ui/button";
+
 const CompanyHero = () => {
   return (
     <>
@@ -13,7 +15,25 @@ const CompanyHero = () => {
             </p>
           </div>
           <div className="flex items-center gap-[16px] max-w-[380px] mx-auto">
-            <a href="#" className=""></a>
+            <Button
+              variant="outline"
+              className="border-box !border-[#0264B5] rounded-[10px] !bg-transparent"
+            >
+              <a
+                href="#"
+                className="font-medium text-[14px] leading-[18px] text-center text-[#0264B5]"
+              >
+                See Our Projects
+              </a>
+            </Button>
+            <Button className="border-box rounded-[10px]">
+              <a
+                href="#"
+                className="font-medium text-[14px] leading-[18px] text-center"
+              >
+                Lets Work Together
+              </a>
+            </Button>
           </div>
         </div>
       </section>

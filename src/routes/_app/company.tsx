@@ -1,3 +1,4 @@
+import Branding from "@/components/company/branding";
 import CompanyHero from "@/components/company/hero";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -9,6 +10,7 @@ function RouteComponent() {
   return (
     <>
       <CompanyHero />
+      <Branding />
     </>
   );
 }
