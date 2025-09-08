@@ -94,8 +94,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootComponent() {
   const data = Route.useLoaderData();
+  // eslint-disable-next-line no-console
+  console.log(data);
   return (
-    <ThemeProvider theme={data}>
+    <ThemeProvider theme={"dark"}>
       <RootDocument>
         <Outlet />
         <TanStackRouterDevtools />
@@ -108,8 +110,10 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const theme = Route.useLoaderData();
+  // eslint-disable-next-line no-console
+  console.log(theme);
   return (
-    <html lang="en" className={theme} suppressHydrationWarning>
+    <html lang="en" className={"dark"} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
