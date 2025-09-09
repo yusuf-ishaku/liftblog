@@ -15,6 +15,7 @@ import { Route as DemoRouteRouteImport } from './routes/_demo/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoEditorRouteImport } from './routes/_demo/editor'
+import { Route as AppWorkRouteImport } from './routes/_app/work'
 import { Route as AppContactRouteImport } from './routes/_app/contact'
 import { Route as AppCompanyRouteImport } from './routes/_app/company'
 import { Route as AppBlogIndexRouteImport } from './routes/_app/blog/index'
@@ -41,6 +42,11 @@ const DemoEditorRoute = DemoEditorRouteImport.update({
   id: '/editor',
   path: '/editor',
   getParentRoute: () => DemoRouteRoute,
+} as any)
+const AppWorkRoute = AppWorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppContactRoute = AppContactRouteImport.update({
   id: '/contact',
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/company': typeof AppCompanyRoute
   '/contact': typeof AppContactRoute
+  '/work': typeof AppWorkRoute
   '/editor': typeof DemoEditorRoute
   '/blog/$slug': typeof AppBlogSlugRoute
   '/blogx/$slug': typeof BlogBlogxSlugRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/company': typeof AppCompanyRoute
   '/contact': typeof AppContactRoute
+  '/work': typeof AppWorkRoute
   '/editor': typeof DemoEditorRoute
   '/blog/$slug': typeof AppBlogSlugRoute
   '/blogx/$slug': typeof BlogBlogxSlugRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_demo': typeof DemoRouteRouteWithChildren
   '/_app/company': typeof AppCompanyRoute
   '/_app/contact': typeof AppContactRoute
+  '/_app/work': typeof AppWorkRoute
   '/_demo/editor': typeof DemoEditorRoute
   '/_app/blog/$slug': typeof AppBlogSlugRoute
   '/_blog/blogx/$slug': typeof BlogBlogxSlugRoute
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/'
     | '/company'
     | '/contact'
+    | '/work'
     | '/editor'
     | '/blog/$slug'
     | '/blogx/$slug'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/'
     | '/company'
     | '/contact'
+    | '/work'
     | '/editor'
     | '/blog/$slug'
     | '/blogx/$slug'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/_demo'
     | '/_app/company'
     | '/_app/contact'
+    | '/_app/work'
     | '/_demo/editor'
     | '/_app/blog/$slug'
     | '/_blog/blogx/$slug'
@@ -193,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoEditorRouteImport
       parentRoute: typeof DemoRouteRoute
     }
+    '/_app/work': {
+      id: '/_app/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof AppWorkRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/_app/contact': {
       id: '/_app/contact'
       path: '/contact'
@@ -245,6 +264,7 @@ declare module '@tanstack/react-start/server' {
 interface AppRouteRouteChildren {
   AppCompanyRoute: typeof AppCompanyRoute
   AppContactRoute: typeof AppContactRoute
+  AppWorkRoute: typeof AppWorkRoute
   AppBlogSlugRoute: typeof AppBlogSlugRoute
   AppBlogIndexRoute: typeof AppBlogIndexRoute
 }
@@ -252,6 +272,7 @@ interface AppRouteRouteChildren {
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppCompanyRoute: AppCompanyRoute,
   AppContactRoute: AppContactRoute,
+  AppWorkRoute: AppWorkRoute,
   AppBlogSlugRoute: AppBlogSlugRoute,
   AppBlogIndexRoute: AppBlogIndexRoute,
 }

@@ -9,11 +9,11 @@ const links = linkOptions([
     label: "Home",
   },
   {
-    to: "/work" as never,
+    to: "/work",
     label: "Work",
   },
   {
-    to: "/company" as never,
+    to: "/company",
     label: "Company",
   },
   {
@@ -25,8 +25,8 @@ const links = linkOptions([
 const Navbar = () => {
   return (
     <>
-      <nav className="sticky">
-        <div className="h-[97px] top-[41px] mt-[41px] mx-[80px] rounded-[10px] px-[32px] pt-[26px] pb-[27px] flex items-center justify-between border border-solid [border-image-source:linear-gradixent(90.38deg,#00111E_18.59%,rgba(141,141,141,0)_105.12%)]">
+      <nav className="sticky top-4 /top-[41px] bg-background z-10">
+        <div className="h-[97px] mt-[41px] mx-[80px] rounded-[10px] px-[32px] pt-[26px] pb-[27px] flex items-center justify-between border border-solid [border-image-source:linear-gradixent(90.38deg,#00111E_18.59%,rgba(141,141,141,0)_105.12%)]">
           <div className="/bg-black/20 dark:bg-transparent p-1.5 rounded-xl">
             <Avatar className="w-[69.08px] h-[52px] rounded-none">
               <AvatarImage src={appliftLogo} draggable={false} />

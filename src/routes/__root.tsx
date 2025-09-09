@@ -93,9 +93,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootComponent() {
-  const data = Route.useLoaderData();
-  // eslint-disable-next-line no-console
-  console.log(data);
+  // const data = Route.useLoaderData();
   return (
     <ThemeProvider theme={"dark"}>
       <RootDocument>
@@ -109,15 +107,13 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  const theme = Route.useLoaderData();
-  // eslint-disable-next-line no-console
-  console.log(theme);
+  // const theme = Route.useLoaderData();
   return (
     <html lang="en" className={"dark"} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>
