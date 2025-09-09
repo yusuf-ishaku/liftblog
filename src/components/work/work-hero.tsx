@@ -70,7 +70,7 @@ const WorkHero = () => {
           <div className="box-border flex items-center justify-center gap-[10px]">
             <Button
               variant="outline"
-              className="min-w-[182px] pb-3 min-h-[44px] rounded-[10px] border-2 !border-[#0264B5] text-[#0264B5] text-[14px] leading-[18px]"
+              className="min-w-[182px] pb-3 min-h-[44px] rounded-[10px] border-2 !border-[#0264B5] text-[#0264B5] text-[14px] leading-[18px] !bg-transparent"
             >
               Start a Project
             </Button>

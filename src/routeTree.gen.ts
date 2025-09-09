@@ -11,9 +11,10 @@
 import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexxRouteImport } from './routes/indexx'
 import { Route as DemoRouteRouteImport } from './routes/_demo/route'
 import { Route as AppRouteRouteImport } from './routes/_app/route'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as DemoEditorRouteImport } from './routes/_demo/editor'
 import { Route as AppWorkRouteImport } from './routes/_app/work'
 import { Route as AppContactRouteImport } from './routes/_app/contact'
@@ -25,6 +26,11 @@ import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth/
 
 const rootServerRouteImport = createServerRootRoute()
 
+const IndexxRoute = IndexxRouteImport.update({
+  id: '/indexx',
+  path: '/indexx',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoRouteRoute = DemoRouteRouteImport.update({
   id: '/_demo',
   getParentRoute: () => rootRouteImport,
@@ -33,10 +39,10 @@ const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const DemoEditorRoute = DemoEditorRouteImport.update({
   id: '/editor',
@@ -80,34 +86,37 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/indexx': typeof IndexxRoute
   '/company': typeof AppCompanyRoute
   '/contact': typeof AppContactRoute
   '/work': typeof AppWorkRoute
   '/editor': typeof DemoEditorRoute
+  '/': typeof AppIndexRoute
   '/blog/$slug': typeof AppBlogSlugRoute
   '/blogx/$slug': typeof BlogBlogxSlugRoute
   '/blog': typeof AppBlogIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/indexx': typeof IndexxRoute
   '/company': typeof AppCompanyRoute
   '/contact': typeof AppContactRoute
   '/work': typeof AppWorkRoute
   '/editor': typeof DemoEditorRoute
+  '/': typeof AppIndexRoute
   '/blog/$slug': typeof AppBlogSlugRoute
   '/blogx/$slug': typeof BlogBlogxSlugRoute
   '/blog': typeof AppBlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/_app': typeof AppRouteRouteWithChildren
   '/_demo': typeof DemoRouteRouteWithChildren
+  '/indexx': typeof IndexxRoute
   '/_app/company': typeof AppCompanyRoute
   '/_app/contact': typeof AppContactRoute
   '/_app/work': typeof AppWorkRoute
   '/_demo/editor': typeof DemoEditorRoute
+  '/_app/': typeof AppIndexRoute
   '/_app/blog/$slug': typeof AppBlogSlugRoute
   '/_blog/blogx/$slug': typeof BlogBlogxSlugRoute
   '/_app/blog/': typeof AppBlogIndexRoute
@@ -115,42 +124,45 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | '/indexx'
     | '/company'
     | '/contact'
     | '/work'
     | '/editor'
+    | '/'
     | '/blog/$slug'
     | '/blogx/$slug'
     | '/blog'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/indexx'
     | '/company'
     | '/contact'
     | '/work'
     | '/editor'
+    | '/'
     | '/blog/$slug'
     | '/blogx/$slug'
     | '/blog'
   id:
     | '__root__'
-    | '/'
     | '/_app'
     | '/_demo'
+    | '/indexx'
     | '/_app/company'
     | '/_app/contact'
     | '/_app/work'
     | '/_demo/editor'
+    | '/_app/'
     | '/_app/blog/$slug'
     | '/_blog/blogx/$slug'
     | '/_app/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AppRouteRoute: typeof AppRouteRouteWithChildren
   DemoRouteRoute: typeof DemoRouteRouteWithChildren
+  IndexxRoute: typeof IndexxRoute
   BlogBlogxSlugRoute: typeof BlogBlogxSlugRoute
 }
 export interface FileServerRoutesByFullPath {
@@ -177,6 +189,13 @@ export interface RootServerRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/indexx': {
+      id: '/indexx'
+      path: '/indexx'
+      fullPath: '/indexx'
+      preLoaderRoute: typeof IndexxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_demo': {
       id: '/_demo'
       path: ''
@@ -191,12 +210,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/_demo/editor': {
       id: '/_demo/editor'
@@ -265,6 +284,7 @@ interface AppRouteRouteChildren {
   AppCompanyRoute: typeof AppCompanyRoute
   AppContactRoute: typeof AppContactRoute
   AppWorkRoute: typeof AppWorkRoute
+  AppIndexRoute: typeof AppIndexRoute
   AppBlogSlugRoute: typeof AppBlogSlugRoute
   AppBlogIndexRoute: typeof AppBlogIndexRoute
 }
@@ -273,6 +293,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppCompanyRoute: AppCompanyRoute,
   AppContactRoute: AppContactRoute,
   AppWorkRoute: AppWorkRoute,
+  AppIndexRoute: AppIndexRoute,
   AppBlogSlugRoute: AppBlogSlugRoute,
   AppBlogIndexRoute: AppBlogIndexRoute,
 }
@@ -294,9 +315,9 @@ const DemoRouteRouteWithChildren = DemoRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AppRouteRoute: AppRouteRouteWithChildren,
   DemoRouteRoute: DemoRouteRouteWithChildren,
+  IndexxRoute: IndexxRoute,
   BlogBlogxSlugRoute: BlogBlogxSlugRoute,
 }
 export const routeTree = rootRouteImport
