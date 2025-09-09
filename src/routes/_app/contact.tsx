@@ -1,4 +1,3 @@
-import HelpForm from "@/components/global/help-form";
 import { Separator } from "@/components/ui/separator";
 import { createFileRoute } from "@tanstack/react-router";
 import { FaPhone } from "react-icons/fa";
@@ -67,7 +66,6 @@ function RouteComponent() {
             ))}
           </div>
         </div>
-        <HelpForm />
       </div>
     </>
   );

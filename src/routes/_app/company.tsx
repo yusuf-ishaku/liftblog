@@ -1,9 +1,10 @@
+import companyMembers from "@/assets/images/company-members.png";
 import Branding from "@/components/company/branding";
 import CompanyHero from "@/components/company/hero";
+import { HowWeWork } from "@/components/company/how-we-work";
+import OurStructure from "@/components/company/our-structure";
 import { Separator } from "@/components/ui/separator";
 import { createFileRoute } from "@tanstack/react-router";
-import companyMembers from "@/assets/images/company-members.png";
-import { HowWeWork } from "@/components/company/how-we-work";
 
 export const Route = createFileRoute("/_app/company")({
   component: RouteComponent,
@@ -38,6 +39,7 @@ function RouteComponent() {
         <Separator className="[background-image:linear-gradient(90.38deg,#00111E_18.59%,rgba(141,141,141,0)_105.12%)] !w-[441px] mx-auto" />
       </div>
       <HowWeWork />
+      <OurStructure />
     </>
   );
 }

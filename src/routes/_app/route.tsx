@@ -1,3 +1,4 @@
+import ContactForm from "@/components/global/contact-form";
 import Footer from "@/components/global/footer";
 import Navbar from "@/components/global/navbar";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
@@ -12,6 +13,7 @@ function RouteComponent() {
       <Navbar />
       <main className="w-full px-[80px] mt-[32px]">
         <Outlet />
+        <ContactForm />
       </main>
       <Footer />
     </>

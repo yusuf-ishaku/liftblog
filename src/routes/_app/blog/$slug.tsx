@@ -1,5 +1,4 @@
 import BlogCard from "@/components/blog/blog-card";
-import BlogContact from "@/components/blog/blog-contact";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { APP_URL } from "@/config";
@@ -143,7 +142,6 @@ function RouteComponent() {
           ))}
         </div>
       </div>
-      <BlogContact />
     </div>
   );
 }

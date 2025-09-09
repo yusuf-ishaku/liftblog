@@ -1,10 +1,10 @@
 import gradientGlass from "@/assets/images/gradient-glass.png";
-import HelpForm from "../global/help-form";
+import HelpForm from "./help-form";
 
-const BlogContact = () => {
+const ContactForm = () => {
   return (
     <>
-      <div className="mt-[341px]">
+      <div>
         <div className="grid grid-cols-2 items-start gap-[41px]">
           <div className="flex flex-col items-start gap-[64px]">
             <img
@@ -31,4 +31,4 @@ const BlogContact = () => {
   );
 };
 
-export default BlogContact;
+export default ContactForm;

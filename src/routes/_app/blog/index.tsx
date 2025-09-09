@@ -1,4 +1,3 @@
-import BlogContact from "@/components/blog/blog-contact";
 import BlogGrid from "@/components/blog/blog-grid";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -13,7 +12,6 @@ function RouteComponent() {
         Blogs
       </h2>
       <BlogGrid />
-      <BlogContact />
     </div>
   );
 }
