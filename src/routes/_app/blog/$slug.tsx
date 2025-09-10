@@ -94,7 +94,7 @@ function RouteComponent() {
   });
 
   return (
-    <div>
+    <div className="mb-[190px]">
       <div className="max-w-3xl mx-auto">
         <div className="flex flex-col items-start gap-[32px] ">
           <h1 className="font-medium text-[40px] leading-[50px]">

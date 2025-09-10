@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_app/blog/")({
 
 function RouteComponent() {
   return (
-    <div>
+    <div className="mb-[228px]">
       <h2 className="text-[48px] leading-[60px] font-medium text-white">
         Blogs
       </h2>
